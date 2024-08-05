@@ -39,11 +39,15 @@ public class AuthServiceImpl implements AuthService {
             return null;
         }
         User user = userOptional.get();
+//
+//        if(!bCryptPasswordEncoder.matches(password, user.getPassword())){
+//            String dbPassword = user.getPassword();
+//            System.out.println(dbPassword);
+//            throw new RuntimeException("Wrong password entered");
+//        }
 
-        if(!bCryptPasswordEncoder.matches(password, user.getPassword())){
-            String dbPassword = user.getPassword();
-            System.out.println(dbPassword);
-            throw new RuntimeException("Wrong password entered");
+        if(!password.equals(user.getPassword())){
+            throw new RuntimeException("Wrong password");
         }
 
         String token = RandomStringUtils.randomAlphanumeric(30);
